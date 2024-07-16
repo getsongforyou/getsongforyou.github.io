@@ -22,4 +22,7 @@ export default {
   padding: 0;
   outline: none;
 }
+a{
+  text-decoration: none;
+}
 </style>

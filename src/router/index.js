@@ -13,12 +13,9 @@ const routes = [
   },
   {
     path: '/',
-    // name: 'dashBoard',
-    redirect: '/dashboard',
+    redirect: '/example/table',
     component: () => import('@/layout/indexLayout.vue'),
-    // meta: {
-    //   title: 'dashBoard'
-    // },
+    
     children: [
       {
         path: 'dashboard',
@@ -34,6 +31,7 @@ const routes = [
     path: '/example',
     name: 'example',
     redirect: '/example/table',
+    component: ()=>import('@/layout/indexLayout.vue'),
     meta: {
       title: 'example'
     },
@@ -43,11 +41,12 @@ const routes = [
         name: 'table',
         component: () => import('@/views/example/TableView.vue'),
         meta: { title: 'table' },
-
+        
       },
       {
         path: 'tree',
         name: 'tree',
+        component: () => import('@/views/example/TreeView.vue'),
         meta: { title: 'tree' }
       }
     ]

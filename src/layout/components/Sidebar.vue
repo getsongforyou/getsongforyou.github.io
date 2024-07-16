@@ -1,10 +1,16 @@
 <template>
   <div class="aside">
-    <el-menu class="el-menu-demo"  >
+    <el-menu
+      class="aside__menu"
+      background-color="#545c64"
+      text-color="#fff"
+      active-text-color="#ffd04b"
+    >
       <sidebar-item
         v-for="route in routes"
         :key="route.path"
         :routeItem="route"
+        :base-path="route.path"
       >
       </sidebar-item>
     </el-menu>
@@ -23,14 +29,18 @@ export default {
   computed: {
     // 获取路由表数组
     routes() {
-      return this.$router.options.routes.filter(item=>{
-        if(item.hidden){
-          return false
-        }else{
-          return true
+      return this.$router.options.routes.filter((item) => {
+        if (item.hidden) {
+          return false;
+        } else {
+          return true;
         }
       });
     },
+  },
+
+  created(){
+    console.log('path', this.$route)
   },
 
   mounted() {},
@@ -38,3 +48,9 @@ export default {
   methods: {},
 };
 </script>
+
+<style>
+.aside__menu {
+  height: 100%;
+}
+</style>

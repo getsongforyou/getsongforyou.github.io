@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="navbar">
     <el-breadcrumb separator="/">
-      <el-breadcrumb-item v-for="item in itemList" :key="item.path" :to="item.path">{{ item.meta.title }}</el-breadcrumb-item>
+      <el-breadcrumb-item v-for="item in levelList" :key="item.path" :to="item.path">{{ item.meta.title }}</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>
@@ -12,8 +12,14 @@ export default {
 
   data() {
     return {
-      itemList: []
+      // itemList: []
     };
+  },
+
+  computed: {
+    levelList(){
+      return this.getBreadcrumb()
+    }
   },
 
   created(){
@@ -42,9 +48,16 @@ export default {
         matched = [{ path:'/dashboard', meta: { title: 'dashboard'}}].concat(matched)
       }
       // console.log(matched, 'matched second')
-      this.itemList = matched
+      return matched
 
     }
   },
 };
 </script>
+
+<style  scoped>
+/* navbar{
+  border-bottom: 1px solid #111;
+  
+}. */
+</style>
