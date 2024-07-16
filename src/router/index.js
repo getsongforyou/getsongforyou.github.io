@@ -23,6 +23,7 @@ const routes = [
       {
         path: 'dashboard',
         name: 'dashboard',
+        component: () => import('@/views/DashBoard.vue'),
         meta: {
           title: 'DashBoard'
         }

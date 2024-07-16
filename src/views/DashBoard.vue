@@ -17,6 +17,9 @@ export default {
   mounted() {
     
   },
+  created(){
+    console.log('create dashboard')
+  },
 
   methods: {
     

@@ -1,25 +1,24 @@
 <template>
   <div class="container">
-    <!-- <div class="container__sidebar">
+    <div class="container__sidebar">
         <Sidebar :routeItem="routeList"></Sidebar>
-    </div> -->
-    <!-- <div class="container__main">
+    </div>
+    <div class="container__main">
         <div class="container__main__nav">
             <Navbar></Navbar>
         </div>
-        <AppMain></AppMain>
-    </div> -->
-    <navbar></navbar>
+        <app-main></app-main>
+    </div>
   </div>
 </template>
 
 <script>
-// import AppMain from './components/AppMain.vue';
+import AppMain from './components/AppMain.vue';
 import Navbar from './components/Navbar.vue';
-// import Sidebar from './components/Sidebar.vue';
+import Sidebar from './components/Sidebar.vue';
 
 export default {
-  components: { Navbar },
+  components: { Navbar, AppMain, Sidebar },
   name: 'QingMengIndexLayout',
 
   data() {

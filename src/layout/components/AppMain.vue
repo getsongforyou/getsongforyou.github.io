@@ -1,6 +1,6 @@
 <template>
   <section>
-    <router-view :key="key"></router-view>
+    <router-view ></router-view>
   </section>
 </template>
 
@@ -14,9 +14,10 @@ export default {
     };
   },
   computed: {
-    key(){
-      return this.$route.path
-    }
+    // key(){
+    //   console.log('appmain', this.$route.path)
+    //   return this.$route.path
+    // }
   },
 
   mounted() {

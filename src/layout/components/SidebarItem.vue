@@ -2,8 +2,8 @@
   <aside class="sidebar">
     <!-- 子路由仅有一个或没有时，作为选项，多个时，作为下拉菜单 -->
     <template v-if="isMenuItem(routeItem)">
-      <el-menu-item :index="routeItem.path">
-        {{ routeItem.meta.title }}
+      <el-menu-item :index="onlyChild.path">
+        {{ onlyChild.meta.title }}
       </el-menu-item>
     </template>
     <el-submenu v-else :index="routeItem.path">
