@@ -16,9 +16,9 @@ const routes = [
     // name: 'dashBoard',
     redirect: '/dashboard',
     component: () => import('@/layout/indexLayout.vue'),
-    meta: {
-      title: 'dashBoard'
-    },
+    // meta: {
+    //   title: 'dashBoard'
+    // },
     children: [
       {
         path: 'dashboard',
