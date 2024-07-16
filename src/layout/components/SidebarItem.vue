@@ -2,19 +2,19 @@
   <aside class="sidebar">
     <!-- 子路由仅有一个或没有时，作为选项，多个时，作为下拉菜单 -->
     <template v-if="isMenuItem(routeItem)">
-      <el-menu-item>
+      <el-menu-item :index="routeItem.path">
         {{ routeItem.meta.title }}
       </el-menu-item>
     </template>
-    <el-sub-menu v-else>
+    <el-submenu v-else :index="routeItem.path">
       <template slot="title">
-        {{ routeItem.meta.title }}
+        <div v-if="routeItem.meta">{{ routeItem.meta.title }}</div>
       </template>
-      <sidebar v-for="child in routeItem.children"
+      <qing-meng-sidebar v-for="child in routeItem.children"
       :key="child.path"
       :routeItem="child">
-    </sidebar>
-    </el-sub-menu>
+    </qing-meng-sidebar>
+    </el-submenu>
   </aside>
 </template>
 
@@ -29,6 +29,7 @@ export default {
   },
 
   data() {
+    this.onlyChild = null
     return {
       
     };
@@ -45,16 +46,23 @@ export default {
       // }else{
       //   return false
       // }
-      // let children = route.children || []
-      // const showChildren = children.filter(item=>{
-      //   if(item.hidden){
-      //     return true
-      //   }else{
-      //     this.onlyChildren = route
-      //     return false
-      //   }
-      // })
-      return route
+      let children = route.children || []
+      const showChildren = children.filter(item=>{
+        if(item.hidden){
+          return false
+        }else{
+          this.onlyChild = item;
+          return true
+        }
+      })
+      if(showChildren.length ===1){
+        return true
+      }
+      if(showChildren.length===0){
+        this.onlyChild = {...route,path: ''}
+        return true
+      }
+      return false
     }
   },
 };

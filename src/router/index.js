@@ -9,7 +9,7 @@ const routes = [
     name: 'login',
     hidden: true,
     component: () => import('@/views/LoginView.vue'),
-    
+
   },
   {
     path: '/',
@@ -40,8 +40,9 @@ const routes = [
       {
         path: 'table',
         name: 'table',
+        component: () => import('@/views/example/TableView.vue'),
         meta: { title: 'table' },
-        
+
       },
       {
         path: 'tree',
@@ -55,6 +56,9 @@ const routes = [
     name: '404',
     hidden: true,
     component: () => import('@/views/404.vue')
+  },
+  {
+    path:'*',redirect: '/404',hidden: true
   }
 ]
 

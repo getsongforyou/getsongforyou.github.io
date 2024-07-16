@@ -1,6 +1,6 @@
 <template>
   <div class="aside">
-    <el-menu class="el-menu-demo" @select="handleSelect" >
+    <el-menu class="el-menu-demo"  >
       <sidebar-item
         v-for="route in routes"
         :key="route.path"
@@ -21,8 +21,15 @@ export default {
     return {};
   },
   computed: {
+    // 获取路由表数组
     routes() {
-      return this.$router.options.routes;
+      return this.$router.options.routes.filter(item=>{
+        if(item.hidden){
+          return false
+        }else{
+          return true
+        }
+      });
     },
   },
 
