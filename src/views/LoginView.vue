@@ -3,7 +3,35 @@
     <div class="login__card">
       <div class="login__card-title">青檬</div>
       <div class="login__card__form">
-        <el-input
+        <el-form
+          :model="userForm"
+          status-icon
+          :rules="rules"
+          ref="ruleForm"
+          label-width="100px"
+        >
+          <el-form-item label="用户名" prop="name">
+            <el-input
+              type="text"
+              v-model="user.name"
+              autocomplete="off"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="password">
+            <el-input
+              type="password"
+              v-model="user.password"
+              autocomplete="off"
+            ></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="loginEffect(user)"
+              >Login</el-button
+            >
+          </el-form-item>
+        </el-form>
+
+        <!-- <el-input
           v-model="user"
           style="max-width: 300px"
           placeholder="Please input"
@@ -12,7 +40,9 @@
           maxlength="12"
           minlength="2"
         >
-          <template #prepend>&nbsp;&nbsp;&nbsp;&nbsp;user:&nbsp;&nbsp;&nbsp;&nbsp;</template> </el-input
+          <template #prepend
+            >&nbsp;&nbsp;&nbsp;&nbsp;user:&nbsp;&nbsp;&nbsp;&nbsp;</template
+          > </el-input
         ><el-input
           v-model="password"
           style="max-width: 300px"
@@ -24,7 +54,13 @@
         >
           <template #prepend>password:</template>
         </el-input>
-        <el-button @click="loginEffect" type="primary" class="login__card__form-item" plain>Login</el-button>
+        <el-button
+          @click="loginEffect"
+          type="primary"
+          class="login__card__form-item"
+          plain
+          >Login</el-button
+        > -->
       </div>
     </div>
   </div>
@@ -38,28 +74,43 @@ export default {
 
   data() {
     return {
-      user: "",
-      password: "",
+      user: {
+        name: "",
+        password: "",
+      },
+      rules: {
+        name: [
+          { required: true, message: "请输入用户名", trigger: "blur" },
+          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
+        ],
+        password: [
+          {
+            required: true,
+            message: "请输入密码",
+            trigger: "blur",
+          },
+        ],
+      },
     };
   },
 
   mounted() {},
-  created(){
-    console.log(this.$router)
-    console.log(1)
+  created() {
+    console.log(this.$router);
+    console.log(1);
   },
 
   methods: {
     // check form
-    checkForm(){
+    checkForm() {
+      
     },
     // sign in
-    loginEffect(){
-      this.checkForm()
-      this.$store.dispatch('login',{user:this.user,password:this.password}).then(()=>{
-        this.$router.push('/')
-      })
-
+    loginEffect() {
+      this.checkForm();
+      this.$store.dispatch("login", this.user).then(() => {
+        this.$router.push("/");
+      });
 
       // postLogin({
       //   user: this.user,
@@ -83,45 +134,45 @@ export default {
       //         type: 'error',
       //         duration: 3000
       //       })
-            
+
       //       console.log('alert')
       //     }
       //   })
-    }
+    },
   },
 };
 </script>
 
 <style lang="scss">
-.login{
-    width: 100vw;
-    height: 100vh;
+.login {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../assets/img/qm.jfif");
+  background-size: 100% 100%;
+  &__card {
+    width: 400px;
+    background-color: rgba($color: #fff, $alpha: 0.5);
+    border-radius: 10px;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    padding: 30px;
     align-items: center;
-    background: url('../assets/img/qm.jfif');
-    background-size: 100% 100%;
-    &__card{
-        width: 400px;
-        background-color: rgba($color: #fff, $alpha: 0.5);
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        padding: 30px;
-        align-items: center;
-        &-title{
-            color: #323;
-            font-size: 24px;
-            margin-bottom: 30px;
-        }
-        &__form{
-            display: flex;
-            flex-direction: column;
-            &-item{
-                margin-bottom: 10px;
-            }
-        }
+    &-title {
+      color: #323;
+      font-size: 24px;
+      margin-bottom: 30px;
     }
+    &__form {
+      display: flex;
+      flex-direction: column;
+      &-item {
+        margin-bottom: 10px;
+      }
+    }
+  }
 }
 </style>
