@@ -3,16 +3,32 @@
     <el-breadcrumb separator="/">
       <el-breadcrumb-item v-for="item in levelList" :key="item.path" :to="item.path">{{ item.meta.title }}</el-breadcrumb-item>
     </el-breadcrumb>
+    <el-dropdown>
+      <div>
+
+        <el-avatar :src="imgUrl"></el-avatar>
+        <i class="el-icon-arrow-down el-icon--right"></i>
+      </div>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item>home</el-dropdown-item>
+        <el-dropdown-item ><div @click="handleLogout" >logout</div></el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
+
+    
   </div>
 </template>
 
 <script>
+
+
 export default {
   name: "QingMengNavbar",
 
   data() {
     return {
       // itemList: []
+      imgUrl: require('@/assets/img/avator.jpg')
     };
   },
 
@@ -29,6 +45,15 @@ export default {
   mounted() {},
 
   methods: {
+    handleLogout(){
+      this.$store.dispatch('logOut').then(s =>{
+        if(s){
+          this.$router.push('/login')
+        }else{
+          this.$message({message:'error,logout again'})
+        }
+      })
+    },
     getBreadcrumb(){
       // console.log(this.$route, 'this.$route')
       let matched = this.$route.matched.filter(item=>{
@@ -60,4 +85,9 @@ export default {
   border-bottom: 1px solid #111;
   
 }. */
+.navbar{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
 </style>

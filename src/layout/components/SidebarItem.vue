@@ -51,16 +51,12 @@ export default {
   methods: {
     resolvePath(routePath){
       let result
-      console.log('start', result)
       
-      console.log('this.basePath',this.basePath)
-      console.log('routePath',routePath)
       if(this.basePath == '/'){
         result=this.basePath+routePath
       }else{
         result=this.basePath+'/'+routePath
       }
-      console.log('resolvepath',result)
       return result
     },
     isMenuItem(route) {

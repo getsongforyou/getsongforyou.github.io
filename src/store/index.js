@@ -17,6 +17,7 @@ export default new Vuex.Store({
     },
     logOut(state){
       state.token = null
+      console.log('rm token')
     }
   },
   actions: {
@@ -27,6 +28,7 @@ export default new Vuex.Store({
         console.log('action', response.data)
         const token = response.data.data.token
         commit('setToken',token)
+        return true
 
       }else{
         return false
@@ -36,8 +38,10 @@ export default new Vuex.Store({
       const response = await logOut()
       if(response.data.code =="200"){
         commit('logOut')
+        return true
       }else{
         console.log('error,please logout again!')
+        return false
       }
     }
   },

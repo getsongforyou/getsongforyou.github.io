@@ -6,7 +6,6 @@
         <el-form
           :model="userForm"
           status-icon
-          :rules="rules"
           ref="ruleForm"
           label-width="100px"
         >
@@ -31,36 +30,7 @@
           </el-form-item>
         </el-form>
 
-        <!-- <el-input
-          v-model="user"
-          style="max-width: 300px"
-          placeholder="Please input"
-          class="login__card__form-item"
-          type="text"
-          maxlength="12"
-          minlength="2"
-        >
-          <template #prepend
-            >&nbsp;&nbsp;&nbsp;&nbsp;user:&nbsp;&nbsp;&nbsp;&nbsp;</template
-          > </el-input
-        ><el-input
-          v-model="password"
-          style="max-width: 300px"
-          placeholder="Please input"
-          class="login__card__form-item"
-          type="password"
-          maxlength="18"
-          minlength="8"
-        >
-          <template #prepend>password:</template>
-        </el-input>
-        <el-button
-          @click="loginEffect"
-          type="primary"
-          class="login__card__form-item"
-          plain
-          >Login</el-button
-        > -->
+        
       </div>
     </div>
   </div>
@@ -75,22 +45,10 @@ export default {
   data() {
     return {
       user: {
-        name: "",
-        password: "",
-      },
-      rules: {
-        name: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
-        ],
-        password: [
-          {
-            required: true,
-            message: "请输入密码",
-            trigger: "blur",
-          },
-        ],
-      },
+        name: "super admin",
+        password: "666666",
+      }
+      
     };
   },
 
@@ -103,41 +61,28 @@ export default {
   methods: {
     // check form
     checkForm() {
-      
+      if(this.user.name==''||this.user.name==''){
+        this.$notify({message:'请输入用户名和密码'})
+        return true
+      }else{
+        return false
+      }
     },
     // sign in
     loginEffect() {
-      this.checkForm();
-      this.$store.dispatch("login", this.user).then(() => {
-        this.$router.push("/");
+      if(this.checkForm())return
+      this.$store.dispatch("login", this.user).then((s) => {
+        if(s){
+          this.$router.push("/");
+
+        }else{
+          this.$notify({
+            title: 'error',
+            message: '用户名或密码错误',
+            duration: 3000
+          })
+        }
       });
-
-      // postLogin({
-      //   user: this.user,
-      //   password: this.password}).then(res=>{
-      //     console.log(res)
-      //     console.log(typeof res.data.code)
-      //     if(res.data.code=='200'){
-      //       this.$router.push({path: '/home'})
-      //     }else{
-      //       this.user = ''
-      //       this.password = ''
-      //       // this.$notify({
-      //       //   title: 'error',
-      //       //   message: 'error',
-      //       //   type: 'error',
-      //       //   duration: 3000,
-      //       // })
-      //       this.$message({
-      //         title: 'error',
-      //         message: '用户名或密码错误',
-      //         type: 'error',
-      //         duration: 3000
-      //       })
-
-      //       console.log('alert')
-      //     }
-      //   })
     },
   },
 };
