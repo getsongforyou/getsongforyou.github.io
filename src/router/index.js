@@ -1,6 +1,7 @@
+import IndexLayout from '@/layout/indexLayout.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import store from '../store'
 Vue.use(VueRouter)
 
 const routes = [
@@ -51,6 +52,54 @@ const routes = [
       }
     ]
   },
+
+  {
+    path: '/form',
+    component: IndexLayout,
+    children: [
+      {
+        component: ()=> import('@/views/FormView.vue'),
+        path: 'index',
+        meta: {title:'form'}
+      }
+    ]
+  },
+
+  {
+    path: '/nested',
+    component: IndexLayout,
+    meta:{title:'nested'},
+    children: [
+      {
+        path: 'menu1',
+        meta: {title:'menu1'},
+        component: ()=>import('@/views/nested/menu1/index.vue'),
+        children: [
+          {
+            path: 'menu1-1',
+            component: ()=> import('@/views/nested/menu1/Menu1-1View.vue'),
+            meta: {title: 'menu1-1'}
+          },
+          {
+            path: 'menu1-2',
+            component: ()=> import('@/views/nested/menu1/Menu1-2View.vue'),
+            meta: {title: 'menu1-2'}
+          },
+          {
+            path: 'menu1-3',
+            component: ()=> import('@/views/nested/menu1/Menu1-3View.vue'),
+            meta: {title: 'menu1-3'}
+          },
+        ]
+      },
+      {
+        path: 'menu2',
+        meta: {title:'menu2'},
+        component: ()=>import('@/views/nested/Menu2.vue')
+      }
+    ]
+  },
+
   {
     path: '/404',
     name: '404',
@@ -70,8 +119,18 @@ const router = new VueRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-//     console.log('before route')
-//     next({name: 'login'})
-// })
+router.beforeEach((to, from, next) => {
+  console.log(to)
+  if(to.path =='/login'){
+    next()
+    return
+  }
+  console.log('beforeach')
+    if(store.state.token){
+      console.log('has token')
+      next()
+    }else{
+      next({path:'login'})
+    }
+})
 export default router

@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { postLogin } from '@/api/loginapi';
+// import { postLogin } from '@/api/loginapi';
 
 export default {
   name: "QingMengLoginView",
@@ -56,32 +56,37 @@ export default {
     // sign in
     loginEffect(){
       this.checkForm()
-      postLogin({
-        user: this.user,
-        password: this.password}).then(res=>{
-          console.log(res)
-          console.log(typeof res.data.code)
-          if(res.data.code=='200'){
-            this.$router.push({path: '/home'})
-          }else{
-            this.user = ''
-            this.password = ''
-            // this.$notify({
-            //   title: 'error',
-            //   message: 'error',
-            //   type: 'error',
-            //   duration: 3000,
-            // })
-            this.$message({
-              title: 'error',
-              message: '用户名或密码错误',
-              type: 'error',
-              duration: 3000
-            })
+      this.$store.dispatch('login',{user:this.user,password:this.password}).then(()=>{
+        this.$router.push('/')
+      })
+
+
+      // postLogin({
+      //   user: this.user,
+      //   password: this.password}).then(res=>{
+      //     console.log(res)
+      //     console.log(typeof res.data.code)
+      //     if(res.data.code=='200'){
+      //       this.$router.push({path: '/home'})
+      //     }else{
+      //       this.user = ''
+      //       this.password = ''
+      //       // this.$notify({
+      //       //   title: 'error',
+      //       //   message: 'error',
+      //       //   type: 'error',
+      //       //   duration: 3000,
+      //       // })
+      //       this.$message({
+      //         title: 'error',
+      //         message: '用户名或密码错误',
+      //         type: 'error',
+      //         duration: 3000
+      //       })
             
-            console.log('alert')
-          }
-        })
+      //       console.log('alert')
+      //     }
+      //   })
     }
   },
 };

@@ -1,6 +1,6 @@
 <template>
   <div>
-    dashboard
+    Hello,super admin!
   </div>
 </template>
 
@@ -26,3 +26,10 @@ export default {
   },
 };
 </script>
+
+<style  scoped>
+
+div{
+  font-size: 40px;
+}
+</style>
