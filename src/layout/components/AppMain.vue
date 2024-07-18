@@ -1,31 +1,49 @@
 <template>
-  <section>
-    <router-view ></router-view>
+  <section class="app-main">
+    <transition  mode="out-in"> 
+
+        <router-view :key="key" >
+        </router-view>
+    </transition>
+
+    <!-- <router-view v-slot="{Component}">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" :key="$route.path"/>
+          
+        </transition>
+
+    </router-view> -->
+   
   </section>
 </template>
 
 <script>
 export default {
-  name: 'QingMengAppMain',
+  name: "QingMengAppMain",
 
   data() {
-    return {
-      
-    };
+    return {};
   },
   computed: {
-    // key(){
-    //   console.log('appmain', this.$route.path)
-    //   return this.$route.path
-    // }
+    key() {
+      console.log('key', this.$route.path)
+      return this.$route.path;
+    }
   },
 
-  mounted() {
-    
-  },
+  mounted() {},
 
-  methods: {
-    
-  },
+  methods: {},
 };
 </script>
+<style>
+.app-main {
+  /*50 = navbar  */
+  min-height: calc(100vh - 50px);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.fixed-header+.app-main {
+  padding-top: 50px;
+}</style>

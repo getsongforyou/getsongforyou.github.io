@@ -10,8 +10,8 @@
         <i class="el-icon-arrow-down el-icon--right"></i>
       </div>
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item>home</el-dropdown-item>
-        <el-dropdown-item ><div @click="handleLogout" >logout</div></el-dropdown-item>
+        <el-dropdown-item><span @click="handleHome">home</span></el-dropdown-item>
+        <el-dropdown-item ><span @click="handleLogout" >logout</span></el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
 
@@ -34,6 +34,7 @@ export default {
 
   computed: {
     levelList(){
+      
       return this.getBreadcrumb()
     }
   },
@@ -45,6 +46,10 @@ export default {
   mounted() {},
 
   methods: {
+    handleHome(){
+      console.log('home', this.$route)
+      this.$router.push('/dashboard')
+    },
     handleLogout(){
       this.$store.dispatch('logOut').then(s =>{
         if(s){
@@ -89,5 +94,6 @@ export default {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 </style>

@@ -3,7 +3,7 @@
     <!-- 子路由仅有一个或没有时，作为选项，多个时，作为下拉菜单 -->
     <template v-if="isMenuItem(routeItem)">
       <router-link :to="resolvePath(onlyChild.path)">
-        <el-menu-item :index="onlyChild.path">
+        <el-menu-item :index="resolvePath(onlyChild.path)">
           {{ onlyChild.meta.title }}
         </el-menu-item>
       </router-link>
@@ -78,7 +78,7 @@ export default {
         return true;
       }
       if (showChildren.length === 0) {
-        this.onlyChild = { ...route, path: "" };
+        this.onlyChild = { ...route,path: '' };
         return true;
       }
       return false;

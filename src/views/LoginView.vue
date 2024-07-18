@@ -4,7 +4,7 @@
       <div class="login__card-title">青檬</div>
       <div class="login__card__form">
         <el-form
-          :model="userForm"
+          :model="user"
           status-icon
           ref="ruleForm"
           label-width="100px"
@@ -37,7 +37,6 @@
 </template>
 
 <script>
-// import { postLogin } from '@/api/loginapi';
 
 export default {
   name: "QingMengLoginView",

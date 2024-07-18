@@ -18,7 +18,7 @@ export default {
     
   },
   created(){
-    console.log('create dashboard')
+    // console.dir('dir route',this.$route)
   },
 
   methods: {

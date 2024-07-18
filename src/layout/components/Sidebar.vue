@@ -5,6 +5,7 @@
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b"
+      default-active="/dashboard"
     >
       <sidebar-item
         v-for="route in routes"
@@ -37,6 +38,7 @@ export default {
         }
       });
     },
+    
   },
 
   created(){

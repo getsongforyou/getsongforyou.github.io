@@ -5,6 +5,7 @@ import store from '../store'
 Vue.use(VueRouter)
 
 const routes = [
+  
   {
     path: '/login',
     name: 'login',
@@ -14,7 +15,7 @@ const routes = [
   },
   {
     path: '/',
-    redirect: '/example/table',
+    redirect: '/dashboard',
     component: () => import('@/layout/indexLayout.vue'),
     
     children: [
@@ -99,6 +100,18 @@ const routes = [
       }
     ]
   },
+  {
+    path:'/external',
+    // meta: {title: 'external'},
+    component: IndexLayout,
+    children: [
+      {
+        path: '',
+        meta: {title:'external'},
+        component: ()=>import('@/views/ExternalView.vue')
+      }
+    ]
+  },
 
   {
     path: '/404',
@@ -120,17 +133,17 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to)
+  // console.log(to)
   if(to.path =='/login'){
     next()
     return
   }
-  console.log('beforeach')
+  // console.log('beforeach')
     if(store.state.token){
-      console.log('has token')
+      // console.log('has token')
       next()
     }else{
-      next({path:'login'})
+      next({path:'/login'})
     }
 })
 export default router
