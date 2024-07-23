@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chart</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+</head>
+<body>
+    <div class="" id="main" style="width:600px;height: 400px;"></div>
+    <script>
+        let chart = echarts.init(document.querySelector('#main'))
+        var option = {
+        title: {
+                text: 'bar'
+            },
+            legend: {
+                show: true,
+                // right: 20
+            },
+            grid: {
+                show:true
+            },
+            // visualMap: {
+            //     type: 'piecewise'
+            // },
+            toolTip: {
+                show: true,
+                trigger: 'item',
+                axisPointer: {
+                    show: true
+                }
+            },
+            xAxis: {
+                type: 'category',
+                data: ['G1','G2','G3','G4','G5']
+            },
+            yAxis: {
+                type: 'value',
+
+            },
+            series: [
+                {
+                    type: 'bar',
+                    name: 'women',
+                    data: [20,34,30,35,27]
+                },
+                {
+                    type: 'bar',
+                    name: 'man',
+                    data: [25,32,34,20,25]
+                },
+                // {
+                //     labelLine: {
+                //         show:true,
+                //         lineStyle: {
+                //             color: '#555'
+                //         }
+                //     }
+                // }
+            ]
+        }
+        chart.setOption(option)
+    </script>
+</body>
+</html>

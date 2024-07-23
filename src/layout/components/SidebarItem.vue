@@ -4,13 +4,16 @@
     <template v-if="isMenuItem(routeItem)">
       <router-link :to="resolvePath(onlyChild.path)">
         <el-menu-item :index="resolvePath(onlyChild.path)">
+          <i :class="onlyChild.meta.icon"></i>
           {{ onlyChild.meta.title }}
         </el-menu-item>
       </router-link>
     </template>
     <el-submenu v-else :index="routeItem.path">
       <template slot="title">
-        <div v-if="routeItem.meta">{{ routeItem.meta.title }}</div>
+        <div v-if="routeItem.meta">
+          <i :class="routeItem.meta.icon"></i>
+          {{ routeItem.meta.title }}</div>
       </template>
       <qing-meng-sidebar
         v-for="child in routeItem.children"

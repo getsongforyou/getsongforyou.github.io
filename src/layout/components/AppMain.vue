@@ -1,18 +1,10 @@
 <template>
   <section class="app-main">
-    <transition  mode="out-in"> 
+    <transition name="fade-transform" mode="out-in"> 
 
         <router-view :key="key" >
         </router-view>
     </transition>
-
-    <!-- <router-view v-slot="{Component}">
-        <transition name="fade" mode="out-in">
-          <component :is="Component" :key="$route.path"/>
-          
-        </transition>
-
-    </router-view> -->
    
   </section>
 </template>

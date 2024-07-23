@@ -24,7 +24,8 @@ const routes = [
         name: 'dashboard',
         component: () => import('@/views/DashBoard.vue'),
         meta: {
-          title: 'DashBoard'
+          title: 'DashBoard',
+          icon: 'el-icon-s-custom'
         }
       }
     ]
@@ -35,7 +36,8 @@ const routes = [
     redirect: '/example/table',
     component: ()=>import('@/layout/indexLayout.vue'),
     meta: {
-      title: 'example'
+      title: 'example',
+      icon: 'el-icon-aim'
     },
     children: [
       {
@@ -61,7 +63,7 @@ const routes = [
       {
         component: ()=> import('@/views/FormView.vue'),
         path: 'index',
-        meta: {title:'form'}
+        meta: {title:'form',icon:'el-icon-document'}
       }
     ]
   },
@@ -69,7 +71,7 @@ const routes = [
   {
     path: '/nested',
     component: IndexLayout,
-    meta:{title:'nested'},
+    meta:{title:'nested',icon:'el-icon-s-data'},
     children: [
       {
         path: 'menu1',
@@ -107,8 +109,28 @@ const routes = [
     children: [
       {
         path: '',
-        meta: {title:'external'},
+        meta: {title:'external',icon:'el-icon-s-promotion'},
         component: ()=>import('@/views/ExternalView.vue')
+      }
+    ]
+  },
+
+  {
+    path: '/charts',
+    component: IndexLayout,
+    meta:{title:'charts'},
+    children: [
+      {
+        path: 'bar',
+        meta: {title:'bar'},
+        component: ()=>import('@/views/charts/BarChart.vue')
+      },
+      {
+        path: 'line',
+        meta: {
+          title:'line'
+        },
+        component: () =>import('@/views/charts/LineChart.vue')
       }
     ]
   },
