@@ -71,7 +71,7 @@ const routes = [
   {
     path: '/nested',
     component: IndexLayout,
-    meta:{title:'nested',icon:'el-icon-s-data'},
+    meta:{title:'nested',icon:'el-icon-plus'},
     children: [
       {
         path: 'menu1',
@@ -118,7 +118,7 @@ const routes = [
   {
     path: '/charts',
     component: IndexLayout,
-    meta:{title:'charts'},
+    meta:{title:'charts',icon:'el-icon-s-data'},
     children: [
       {
         path: 'bar',
@@ -131,6 +131,32 @@ const routes = [
           title:'line'
         },
         component: () =>import('@/views/charts/LineChart.vue')
+      },
+      {
+        path: 'pie',
+        meta: {
+          title: 'pie'
+        },
+        component: ()=>import('@/views/charts/PieChart.vue')
+      }
+    ]
+  },
+
+  {
+    path: '/component',
+    component: IndexLayout,
+    redirect: '/component/upload',
+    meta: {
+      title: 'component',
+      icon: 'el-icon-orange'
+    },
+    children: [
+      {
+        path: 'upload',
+        meta: {
+          title: 'upload'
+        },
+        component: ()=> import('@/views/component/Upload.vue')
       }
     ]
   },

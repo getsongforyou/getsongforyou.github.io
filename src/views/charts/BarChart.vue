@@ -1,5 +1,5 @@
 <template>
-  <div id="main">
+  <div id="main" style="width: 1000px;height: 600px;">
 
   </div>
 </template>
@@ -17,13 +17,17 @@ export default {
   },
 
   mounted() {
-    
+    this.inits()
   },
 
   methods: {
     inits(){
         let chart = echarts.init(document.getElementById('main'))
         const option = {
+            tooltip: {
+                show: true,
+                trigger: 'axis'
+            },
             title: {
                 text: 'bar'
             },
@@ -33,6 +37,9 @@ export default {
             },
             yAxis: {
                 type: 'value',
+                // axisLine: {
+                //     show: true
+                // }
 
             },
             series: [
