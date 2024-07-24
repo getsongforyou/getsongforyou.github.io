@@ -157,6 +157,13 @@ const routes = [
           title: 'upload'
         },
         component: ()=> import('@/views/component/Upload.vue')
+      },
+      {
+        path: 'richtext',
+        meta: {
+          title: 'richtext'
+        },
+        component: ()=> import('@/views/component/Richtext.vue')
       }
     ]
   },

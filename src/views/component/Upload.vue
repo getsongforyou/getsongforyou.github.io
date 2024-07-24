@@ -19,7 +19,9 @@ export default {
   name: "QingMengUpload",
 
   data() {
-    return {};
+    return {
+        fileList: []
+    };
   },
 
   mounted() {},
