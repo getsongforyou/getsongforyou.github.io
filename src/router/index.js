@@ -164,6 +164,13 @@ const routes = [
           title: 'richtext'
         },
         component: ()=> import('@/views/component/Richtext.vue')
+      },
+      {
+        path: 'markdown',
+        meta: {
+          title: 'markdown'
+        },
+        component: ()=> import('@/views/component/Markdown.vue')
       }
     ]
   },

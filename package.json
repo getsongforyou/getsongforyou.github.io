@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@tinymce/tinymce-vue": "^3.2.8",
+    "@toast-ui/editor": "^3.2.2",
     "axios": "^1.7.2",
     "core-js": "^3.8.3",
     "echarts": "^5.5.1",

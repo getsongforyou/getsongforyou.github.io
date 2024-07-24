@@ -6,6 +6,7 @@
         plugins: 'lists link image table code help wordcount',
         language: 'zh_CN',
         // language_url: '/src/tinymce/langs/zh_CN.js'
+        height: 600
       }"
     />
   </div>
