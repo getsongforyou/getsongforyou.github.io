@@ -33,7 +33,7 @@ export default {
   },
   created(){
     getTable().then(res=>{
-        this.tableData = res.data.data.tableData
+        this.tableData = res.data.tableData
     })
   },
 

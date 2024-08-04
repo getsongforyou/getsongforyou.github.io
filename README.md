@@ -3,6 +3,11 @@
 
 ## 技术相关
 
+
+### 跨域
+
+node 使用中间件cors
+
 ### markdown编辑器
 tuieditor
 [github](https://github.com/nhn/tui.editor?tab=readme-ov-file)

@@ -34,7 +34,7 @@ export default {
 
   created() {
     getTree().then((res) => {
-      this.data = res.data.data.tree;
+      this.data = res.data.tree;
     });
   },
 

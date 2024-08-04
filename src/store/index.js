@@ -15,20 +15,19 @@ export default new Vuex.Store({
   mutations: {
     setToken(state, token) {
       state.token = token
-      console.log('set token')
     },
     logOut(state) {
       state.token = null
-      console.log('rm token')
     }
   },
   actions: {
+    // when success is true, login success. or is false, login false.
     async login({ commit }, user) {
       const response = await login(user)
       console.log('response', response)
-      if (response.data.code == '200') {
+      if (response.data.success) {
         console.log('action', response.data)
-        const token = response.data.data.token
+        const token = response.data.token
         commit('setToken', token)
         return true
 
