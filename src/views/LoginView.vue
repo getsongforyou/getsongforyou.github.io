@@ -44,7 +44,7 @@ export default {
   data() {
     return {
       user: {
-        name: "super admin",
+        username: "super admin",
         password: "666666",
       }
       
@@ -54,13 +54,12 @@ export default {
   mounted() {},
   created() {
     console.log(this.$router);
-    console.log(1);
   },
 
   methods: {
     // check form
     checkForm() {
-      if(this.user.name==''||this.user.name==''){
+      if(this.user.username==''||this.user.password==''){
         this.$notify({message:'请输入用户名和密码'})
         return true
       }else{

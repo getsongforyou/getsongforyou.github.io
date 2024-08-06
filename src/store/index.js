@@ -7,8 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     token: null,
-
-
+    username: null
   },
   getters: {
   },
@@ -18,17 +17,23 @@ export default new Vuex.Store({
     },
     logOut(state) {
       state.token = null
-    }
+      state.username = null
+    },
+    setName(state, username){
+      state.username = username
+    },
+    
   },
   actions: {
     // when success is true, login success. or is false, login false.
-    async login({ commit }, user) {
+    async login({ commit,dispatch }, user) {
       const response = await login(user)
-      console.log('response', response)
       if (response.data.success) {
         console.log('action', response.data)
-        const token = response.data.token
+        const {token, username} = response.data
         commit('setToken', token)
+        commit('setName', username)
+        dispatch('getInfo')
         return true
 
       } else {
