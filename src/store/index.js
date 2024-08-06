@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { login, logOut } from '@/api/userapi'
+import { login, logOut, getInfo } from '@/api/userapi'
 
 Vue.use(Vuex)
 
@@ -44,6 +44,12 @@ export default new Vuex.Store({
         console.log('error,please logout again!')
         return false
       }
+    },
+    
+    async getInfo() {
+        const res = await getInfo()
+        const rolls = res.rolls
+        return rolls
     }
   },
   modules: {

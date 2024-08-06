@@ -13,3 +13,10 @@ export function logOut(params){
         params
     )
 }
+
+// get user info
+export function getInfo(){
+    return instance.get(
+        '/getinfo'
+    )
+}
