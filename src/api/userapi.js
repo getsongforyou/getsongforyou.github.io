@@ -17,6 +17,6 @@ export function logOut(params){
 // get user info
 export function getInfo(){
     return instance.get(
-        '/getinfo'
+        '/getInfo'
     )
 }

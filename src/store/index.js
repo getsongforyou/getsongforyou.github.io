@@ -7,7 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     token: null,
-    username: null
+    username: null,
+    role: null
   },
   getters: {
   },
@@ -22,18 +23,22 @@ export default new Vuex.Store({
     setName(state, username){
       state.username = username
     },
+    setInfo(state, { username, role}){
+      state.username = username
+      state.role = role
+    }
     
   },
   actions: {
     // when success is true, login success. or is false, login false.
-    async login({ commit,dispatch }, user) {
+    async login({ commit }, user) {
       const response = await login(user)
       if (response.data.success) {
         console.log('action', response.data)
         const {token, username} = response.data
         commit('setToken', token)
         commit('setName', username)
-        dispatch('getInfo')
+        // dispatch('getInfo')
         return true
 
       } else {
@@ -53,7 +58,8 @@ export default new Vuex.Store({
     
     async getInfo() {
         const res = await getInfo()
-        const rolls = res.rolls
+        const rolls = res
+        console.log(res, 'res in  getinfo')
         return rolls
     }
   },

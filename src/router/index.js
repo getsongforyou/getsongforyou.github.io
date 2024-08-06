@@ -211,9 +211,8 @@ router.beforeEach((to, from, next) => {
     if (to.path == '/login') {
       next('/')
     } else {
-      store.dispatch('getInfo').then((roll) => {
-        let a = roll;
-          () => { console.log(a) }
+      store.dispatch('getInfo').then((data) => {
+        store.commit('setInfo', data)
       })
       next()
     }

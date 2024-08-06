@@ -8,7 +8,6 @@ const instance = axios.create({
 
 instance.interceptors.request.use(function (config) {
     console.log('start interceptor')
-    console.log(store.state?.token, 'token')
     if (store.state.token) {
         config.headers['Authorization'] = store.state.token
     }

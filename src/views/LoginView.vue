@@ -12,7 +12,7 @@
           <el-form-item label="用户名" prop="name">
             <el-input
               type="text"
-              v-model="user.name"
+              v-model="user.username"
               autocomplete="off"
             ></el-input>
           </el-form-item>
