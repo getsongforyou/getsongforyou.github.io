@@ -12,6 +12,10 @@ const routes = [
     hidden: true,
     component: () => import('@/views/LoginView.vue'),
 
+
+
+
+
   },
   {
     path: '/',
@@ -192,36 +196,90 @@ const asyncRouter = [
     hidden: true,
     component: () => import('@/views/404.vue')
   },
-  {
-    path: '*', redirect: '/404', hidden: true
-  }
+  // {
+  //   path: '*', redirect: '/404', hidden: true,conmponent: IndexLayout
+  // }
 
 ]
 
-router.beforeEach((to, from, next) => {
+
+function filterRouter(asyncR, role) {
+  if (role == 'super admin' || role == 'admin') {
+    return asyncR
+  } else {
+    let res = []
+    asyncR.forEach(route => {
+      if (route.meta && route.meta.role.includes(role)) {
+
+        if (route.children) {
+          route.children = filterRouter(route, role)
+        }
+        res.push(route)
+
+      }
+    })
+    return res
+  }
+}
+
+// 解决Vue-Router升级导致的Uncaught(in promise) navigation guard问题
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+  return originalPush.call(this, location).catch(err => err)
+}
+
+router.beforeEach(async (to, from, next) => {
   // apply for pessmission
   // has token
   //   if to login,then redirect root
   //   if to other view,judge router if add sayncRouter,if no then add
   // no token 
   //   redirect to login view
-  console.log('start each')
   if (store.state.token) {
-    console.log('has stoken')
     if (to.path == '/login') {
-      next('/')
+
+      next({ path: '/' })
     } else {
-      store.dispatch('getInfo').then((data) => {
-        store.commit('setInfo', data)
-      })
-      next()
+      if (store.getters.role) {
+        console.log('get role at  beforeeach', store.getters.role)
+        next()
+      } else {
+        try {
+          const data = await store.dispatch('getInfo')
+          store.commit('setInfo', data)
+          // store.dispatch('getInfo').then((data) => {
+          //   store.commit('setInfo', data)
+
+          //   // 动态挂载路由
+          //   const {role} = data
+          //   filterRouter(asyncRouter, role)
+          const { role } = data
+          const accessRouter = filterRouter(asyncRouter, role)
+          console.log(accessRouter)
+          for (let index = 0; index < accessRouter.length; index++) {
+            console.log(accessRouter[index])
+            router.addRoute(accessRouter[index])
+          }
+          
+
+          // router.addRoutes(accessRouter)
+          console.log( router.getRoutes())
+          console.log(router.options)
+          // router.push({...to,replace: true})
+          store.commit('setRoutes', routes.concat(accessRouter))
+          next({ ...to, replace: true })
+        } catch (e) {
+          console.log(e, 'try')
+        }
+
+      }
     }
   } else {
-    if(to.path=='/login'){
+    if (to.path == '/login') {
       next()
-    }else{
-      
-      console.log('no token')
+    } else {
+
       next({ path: '/login' })
     }
 

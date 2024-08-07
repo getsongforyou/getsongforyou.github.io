@@ -30,7 +30,9 @@ export default {
   computed: {
     // 获取路由表数组
     routes() {
-      return this.$router.options.routes.filter((item) => {
+      return this.$store.state.routes.filter((item)=>{
+
+      
         if (item.hidden) {
           return false;
         } else {
