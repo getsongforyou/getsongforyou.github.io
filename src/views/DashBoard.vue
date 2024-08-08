@@ -1,6 +1,6 @@
 <template>
   <div>
-    Hello,super admin!
+    Hello {{  username }}!
   </div>
 </template>
 
@@ -13,6 +13,12 @@ export default {
       
     };
   },
+  computed: {
+    username(){
+      return this.$store.state.username
+    }
+  },
+
 
   mounted() {
     
