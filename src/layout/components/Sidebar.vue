@@ -5,7 +5,7 @@
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b"
-      default-active="/dashboard"
+      :default-active="activeside"
     >
       <sidebar-item
         v-for="route in routes"
@@ -40,6 +40,10 @@ export default {
         }
       });
     },
+    activeside() {
+      console.log(this.$router.path, 'path at sidebar')
+      return this.$route.path
+    }
     
   },
 

@@ -7,7 +7,10 @@
         <div class="container__main__nav">
             <Navbar></Navbar>
         </div>
-        <app-main></app-main>
+        <keep-alive>
+          
+          <app-main></app-main>
+        </keep-alive>
     </div>
   </div>
 </template>

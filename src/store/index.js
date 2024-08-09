@@ -26,6 +26,8 @@ export default new Vuex.Store({
     logOut(state) {
       state.token = null
       state.username = null
+      state.role = null
+      state.routes = null
     },
     setName(state, username) {
       state.username = username
