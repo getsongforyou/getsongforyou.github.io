@@ -1,6 +1,7 @@
 <template>
   <div id="container">
     <Editor
+      v-model="articleContent"
       api-key="hcfpvwt52sevcmkg234e20q5c6y92ep8qhs8lxqv0r2d6qgs"
       :init="{
         plugins: 'lists link image table code help wordcount',
@@ -22,7 +23,7 @@ export default {
 
   data() {
     return {
-       
+       articleContent: 'ccccccccccccc'
     };
   },
 

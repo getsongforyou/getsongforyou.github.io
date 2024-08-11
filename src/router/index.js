@@ -52,6 +52,12 @@ const routes = [
 
       },
       {
+        path: 'article',
+        name: 'article',
+        component: () => import('@/views/example/ArticleView.vue'),
+        meta: {title: 'create article'}
+      },
+      {
         path: 'tree',
         name: 'tree',
         component: () => import('@/views/example/TreeView.vue'),

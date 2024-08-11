@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div
+  v-loading = loading>
     <tinymec-vue></tinymec-vue>
 </div>
 </template>
@@ -14,14 +15,20 @@ export default {
 
   data() {
     return {
-      
+      loading: true
     };
   },
 
   mounted() {
     
+    this.loading = false
   },
-
+  created() {
+    setTimeout(() => {
+      
+    }, 1000);
+  },
+  
   methods: {
     
   },
