@@ -45,27 +45,20 @@ const routes = [
     },
     children: [
       {
-        path: 'table',
-        name: 'table',
-        component: () => import('@/views/example/TableView.vue'),
-        meta: { title: 'table' },
-
-      },
-      {
         path: 'article',
         name: 'article',
         component: () => import('@/views/example/ArticleView.vue'),
         meta: {title: 'create article'}
       },
       {
-        path: 'tree',
-        name: 'tree',
-        component: () => import('@/views/example/TreeView.vue'),
-        meta: { title: 'tree' }
+        path: 'article list',
+        name: 'article list',
+        component: ()=> import('@/views/example/ArticleList.vue'),
+        meta: {title: 'Article list'}
       }
     ]
   },
-
+  
   {
     path: '/form',
     component: IndexLayout,
@@ -77,7 +70,7 @@ const routes = [
       }
     ]
   },
-
+  
   {
     path: '/nested',
     component: IndexLayout,
@@ -110,6 +103,27 @@ const routes = [
         meta: { title: 'menu2' },
         component: () => import('@/views/nested/Menu2.vue')
       }
+    ]
+  },
+  {
+    path: '/others',
+    component: IndexLayout,
+    meta: {title:'others', icon: 'el-icon-more'},
+    children: [
+      {
+        path: 'table',
+        name: 'table',
+        component: () => import('@/views/others/TableView.vue'),
+        meta: { title: 'table' },
+        
+      },
+      {
+        path: 'tree',
+        name: 'tree',
+        component: () => import('@/views/others/TreeView.vue'),
+        meta: { title: 'tree' }
+      }
+      
     ]
   },
   {
