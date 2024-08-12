@@ -9,20 +9,22 @@
             include to cache all pages directly. See details Document
         </p>
         <div class="edit-head">
+            <!-- 文章标题 -->
             <div class="title">
-                <input type="text" class="title-input" required >
+                <input type="text" class="title-input" required  v-model="formData.title">
                 <span class="title-note">title</span>
             </div>
-            <el-button type="primary" class="publish">publish</el-button>
+            <el-button type="primary" class="publish" @click="handlePublish()">publish</el-button>
         </div>
         <br />
         <div class="author-info">
+            <!-- 作者，发布时间，简介 -->
             <div class="author">
                 <span class="head">
 
                     author:
                 </span>
-                <input type="text" v-model="author" placeholder="请输入内容" class="author-input">
+                <input type="text" v-model="formData.author" placeholder="请输入内容" class="author-input">
             </div>
             <div class="date">
                 <span class="head">
@@ -30,7 +32,7 @@
                     publish time:
                 </span>
                 <el-date-picker
-                    v-model="date"
+                    v-model="formData.date"
                     type="datetime"
                     placeholder="选择日期时间"
                 >
@@ -42,19 +44,31 @@
 
                     summary:
                 </span>
-                <input type="text" class="summary-input" v-model="summary" >
+                <input type="text" class="summary-input" v-model="formData.summary" >
             </div>
         </div>
+
+        <!-- 富文本编辑器 -->
         <div class="richtxt">
 
-            <tinymec v-model="article" ref="tinymec"></tinymec>
+            <tinymec  ref="tinymec"></tinymec>
         </div>
     </div>
 </template>
 
 <script>
-
 import tinymec from "@/components/tinymec.vue";
+import { postArticle } from "@/api/example.js";
+
+
+const deafultForm = {
+    title: 'test',
+    author: 'test',
+    date: new Date(),
+    summary:'test',
+    text: ''
+}
+
 
 export default {
     components: { tinymec },
@@ -62,20 +76,70 @@ export default {
 
     data() {
         return {
-            date: null,
-            author: null,
-            summary: null,
-            article: 'ccccccccccccc'
+            publishInterval: 0,
+            formData: {
+                title: null,
+                author: null,
+                date: null,
+                summary: null,
+                text: ''
+            }
         };
     },
 
     mounted() {
-        tinymec.init({
-            selector: '.richtxt'
-        })
+        Object.assign(this.formData, deafultForm)
     },
 
-    methods: {},
+    methods: {
+        handlePublish(){
+            console.log('tinymec content:',this.$refs.tinymec.articleContent)
+            this.formData.text = this.$refs.tinymec.articleContent
+            this.formData.date =  new Date(this.formData.date).toISOString().slice(0, 19).replace('T', ' ');
+
+
+
+
+            console.log('publish start')
+            // 粗浅的表单验证
+            console.log(this.formData)
+            for(let i of Object.values(this.formData)){
+                if(i==''){
+                    return this.$message('有信息尚未填写！')
+                }
+            }
+
+
+            // 防抖
+            const now = new Date()
+            if(now-this.publishInterval<10000){
+                return this.$message('您的提交过于频繁，请稍后再试！')
+            }
+            this.publishInterval = new Date()
+            
+            postArticle(this.formData)
+            .then(res=>{
+                if(res.data.success){
+                    this.$message({
+                        message: '文章发布成功！',
+                        type: 'success'
+                    })
+                }else{
+                    this.$message({
+                        message:res.data.message,
+                        type: 'info'
+                    })
+                }
+            })
+            .catch(e=>{
+                this.$message({
+                    message: e,
+                    type: 'warning'
+                })
+                throw e
+            })
+        }
+    },
 };
 </script>
 
