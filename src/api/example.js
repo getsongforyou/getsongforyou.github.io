@@ -8,3 +8,10 @@ export function postArticle(form){
         }
     )
 }
+
+
+export function getArticleList(){
+    return instance.get(
+        '/getArticleList'
+    )
+}
