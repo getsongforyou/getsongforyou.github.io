@@ -34,10 +34,12 @@ export default {
 <style>
 .app-main {
   /*50 = navbar  */
-  min-height: calc(100vh - 50px);
+  height: calc(100vh - 66px);
   width: 100%;
   position: relative;
-  overflow: hidden;
+  /* overflow-x: hidden; */
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .fixed-header+.app-main {
   padding-top: 50px;

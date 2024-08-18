@@ -55,6 +55,12 @@ const routes = [
         name: 'article list',
         component: ()=> import('@/views/example/ArticleList.vue'),
         meta: {title: 'Article list'}
+      },
+      {
+        path: 'pagination',
+        name: 'pagination',
+        component: ()=> import('@/views/example/Pagination.vue'),
+        meta: {title: 'Pagination'}
       }
     ]
   },
