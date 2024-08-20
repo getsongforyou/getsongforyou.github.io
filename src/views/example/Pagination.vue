@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div ref="container" class="container">
         <header class="header">
             <el-button
                 size="small"
@@ -24,12 +24,11 @@
 
         <el-table
             :data="currentData"
-            stripe
-            
+            stripe   
             border
             style="width: 100%"
         >
-            <el-table-column prop="id" label="id" width="40"> </el-table-column>
+            <el-table-column prop="id" label="id" width="80"> </el-table-column>
             <el-table-column
                 class-name="column-title"
                 prop="title"
@@ -100,12 +99,16 @@ export default {
     mounted() {},
 
     methods: {
+        handleClickCheck(){
+            console.log('查看')
+        },
         handleSizeChange(val){
             this.size = val
         },
         handleCurrentChange(val){
             console.log('tabeldata length' , this.total)
             this.currentPage = val
+            this.$refs.container.scrollIntoView(true)
         },
         filterData() {
             if (this.keyword == "") return;
@@ -158,6 +161,10 @@ export default {
 </script>
 
 <style  scoped>
+.container{
+    transition: all 300ms;
+    /* scroll-behavior: smooth; */
+}
 .header {
     display: flex;
     align-items: center;
@@ -166,6 +173,7 @@ export default {
 .refresh {
     margin-right: auto;
 }
+
 .search {
     border: 1px solid rgba(0, 0, 0, 0.3);
     margin-right: 20px;
