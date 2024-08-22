@@ -133,6 +133,19 @@ const routes = [
     ]
   },
   {
+    path: '/profile',
+    component: IndexLayout,
+    redirect: '/profile/index',
+    hidden: true,
+    children: [
+      {
+        path: 'index',
+        component: ()=>import('@/views/profile/Profile.vue'),
+        meta: {title:'profile'}
+      }
+    ]
+  },
+  {
     path: '/external',
     // meta: {title: 'external'},
     component: IndexLayout,

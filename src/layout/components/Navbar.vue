@@ -10,6 +10,9 @@
         <i class="el-icon-arrow-down el-icon--right"></i>
       </div>
       <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item>
+          <span @click="handleProfile">profile</span>
+        </el-dropdown-item>
         <el-dropdown-item><span @click="handleHome">home</span></el-dropdown-item>
         <el-dropdown-item ><span @click="handleLogout" >logout</span></el-dropdown-item>
       </el-dropdown-menu>
@@ -49,6 +52,9 @@ export default {
     handleHome(){
       console.log('home', this.$route)
       this.$router.push('/dashboard')
+    },
+    handleProfile(){
+      this.$router.push('/profile')
     },
     handleLogout(){
       this.$store.dispatch('logOut').then(s =>{
