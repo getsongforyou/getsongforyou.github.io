@@ -10,7 +10,7 @@
         <el-table
             :data="tableData"
             stripe
-            height="700"
+            
             border
             style="width: 100%"
         >
