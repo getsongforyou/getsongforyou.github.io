@@ -2,6 +2,7 @@ import IndexLayout from '@/layout/indexLayout.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store'
+// import { component } from 'vue/types/umd'
 Vue.use(VueRouter)
 
 const routes = [
@@ -142,6 +143,24 @@ const routes = [
         path: 'index',
         component: ()=>import('@/views/profile/Profile.vue'),
         meta: {title:'profile'}
+      }
+    ]
+  },
+  {
+    path:'/postman',
+    component:IndexLayout,
+    redirect:'/postman/workspace',
+    meta: {title:'postman',icon: 'el-icon-aim'},
+    children:[
+      {
+        path: 'workspace',
+        component:()=>import('@/views/postman/workspace.vue'),
+        meta: {title:'workspace'}
+      },
+      {
+        path: 'intro',
+        component:()=>import('@/views/postman/workspace.vue'),
+        meta:{title:'intro'}
       }
     ]
   },

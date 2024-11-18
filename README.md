@@ -20,6 +20,7 @@ vue2 + vue-cli + element-ui + axios
 待实现
 
 * 主题
+* postman
 
 
 ### 跨域
